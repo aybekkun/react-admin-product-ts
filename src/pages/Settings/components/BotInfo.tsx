@@ -27,24 +27,24 @@ const BotInfo = () => {
 
   return (
     <>
-      <Typography variant="h6" color={"primary"}>
+      <Typography  component={"p"}   variant="h6" color={"primary"}>
         Bot info
       </Typography>
-      <Typography color={"info"}>
+      <Typography  component={"p"}  color={"info"}>
         {isLoading && data.id === 0 ? <Skeleton variant="text" sx={{ fontSize: "1rem" }} /> : data.bot_username}
       </Typography>
       <Divider />
-      <Typography variant="h6" color={"primary"}>
+      <Typography  component={"p"}  variant="h6" color={"primary"}>
         Contact
       </Typography>
-      <Typography color={"info"}>
+      <Typography  component={"p"}  color={"info"}>
         {isLoading && data.id === 0 ? <Skeleton variant="text" sx={{ fontSize: "1rem" }} /> : data.contact}
       </Typography>
       <Divider />
-      <Typography variant="h6" color={"primary"}>
+      <Typography  component={"p"}  variant="h6" color={"primary"}>
         Date
       </Typography>
-      <Typography color={"info"}>
+      <Typography  component={"p"}  color={"info"}>
         {isLoading && data.id === 0 ? (
           <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
         ) : (

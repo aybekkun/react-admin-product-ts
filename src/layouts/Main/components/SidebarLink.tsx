@@ -1,4 +1,5 @@
 import { ListItem, ListItemButton, ListItemIcon, ListItemIconProps, ListItemText, SvgIconProps } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { Link } from "react-router-dom";
 type SidebarLinkProps = {
@@ -9,6 +10,7 @@ type SidebarLinkProps = {
 };
 
 const SidebarLink = ({ text = "", open = false, to = "/", icon }: SidebarLinkProps) => {
+
   return (
     <ListItem component={Link} to={to} disablePadding sx={{ display: "block" }}>
       <ListItemButton

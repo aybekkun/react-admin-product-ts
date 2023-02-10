@@ -3,6 +3,7 @@ import Drawer from "@mui/material/Drawer";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { FormEvent, useReducer, useState } from "react";
+import { useTranslation } from "react-i18next";
 import MyTextArea from "../../../components/Form/MyTextArea";
 import MyAddButton from "../../../components/UI/MyAddButton";
 import useAppDispatch from "../../../hooks/useAppDispatch.hook";
@@ -14,7 +15,9 @@ type DrawerCoursesProps = {
   children?: React.ReactNode;
 };
 type ReducerType = { type: string; name: string; description: string };
+
 const DrawerCourses = ({ onClose, open, onFetch }: DrawerCoursesProps) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [isSend, setIsSend] = useState(false);
   const [form, updateForm] = useReducer(
@@ -35,7 +38,7 @@ const DrawerCourses = ({ onClose, open, onFetch }: DrawerCoursesProps) => {
     <Drawer open={open} sx={{ zIndex: 100 }} anchor="right" onClose={onClose}>
       <Box p={2} width={300}>
         <Typography variant="h5" mb={2} color="primary">
-          Course
+          {t("courses")}
         </Typography>
         <form onSubmit={onSubmit}>
           <TextField
@@ -45,7 +48,7 @@ const DrawerCourses = ({ onClose, open, onFetch }: DrawerCoursesProps) => {
             sx={{ mb: 2 }}
             fullWidth
             inputProps={{ maxLength: 200 }}
-            label="Course name"
+            label={t("course_name")}
             required
           />
           <MyTextArea
@@ -55,7 +58,7 @@ const DrawerCourses = ({ onClose, open, onFetch }: DrawerCoursesProps) => {
             size="small"
             sx={{ mb: 2 }}
             fullWidth
-            label="Course description"
+            label={t("course_desc")}
             required
           />
           <MyAddButton disabled={isSend} type="submit" />

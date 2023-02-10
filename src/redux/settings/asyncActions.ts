@@ -54,9 +54,9 @@ export const deleteBot = createAsyncThunk("settings/deleteBot", async (_, thunkA
   }
 });
 
-export const createSendMessage = createAsyncThunk("settings/createSendMessage", async (params, thunkAPI) => {
+export const createSendMessage = createAsyncThunk("settings/createSendMessage", async (fd: FormData, thunkAPI) => {
   try {
-    const { data } = await $authHost.post(`/setting/sendMessage`, params);
+    const { data } = await $authHost.post(`/setting/sendMessage`, fd);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue("Ошибка " + error);

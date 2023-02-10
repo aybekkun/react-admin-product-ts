@@ -29,7 +29,7 @@ type createLeadProps = {
   phone?: string;
   courseId?: number;
   real_status?: number;
-  instrument?: number;
+  instrument?: string;
 };
 
 export const createLead = createAsyncThunk("leads/createLead", async (params: createLeadProps, thunkAPI) => {

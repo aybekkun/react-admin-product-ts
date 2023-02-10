@@ -14,30 +14,30 @@ import { ICourseData } from "../../redux/courses/types";
 import { setOrdersPage } from "../../redux/orders/slice";
 import DrawerCourses from "./components/DrawerCourses";
 import { deleteCourse } from "../../redux/courses/asyncActions";
+import { useTranslation } from "react-i18next";
 
 const CoursesPage = () => {
-  const dispatch = useAppDispatch();
-  const { data, currentPage, total, isLoading, count } = useAppSelector((state) => state.courses);
+  const { t } = useTranslation();
   const columns: IColumns<ICourseData>[] = [
     {
-      title: "Course",
+      title: t("courses"),
       dataIndex: "name",
     },
     {
-      title: "Description",
+      title: t("description"),
       dataIndex: "description",
     },
     {
-      title: "Clicked",
+      title: t("clicked"),
       dataIndex: "clicked",
     },
     {
-      title: "Date",
+      title: t("date"),
       dataIndex: "createdAt",
       render: (row, _) => <>{dayjs(row).format("DD-MM-YYYY HH:mm")}</>,
     },
     {
-      title: "Actions",
+      title: t("actions"),
       dataIndex: "",
       render: (row, render) => (
         <>
@@ -46,6 +46,9 @@ const CoursesPage = () => {
       ),
     },
   ];
+
+  const dispatch = useAppDispatch();
+  const { data, currentPage, total, isLoading, count } = useAppSelector((state) => state.courses);
 
   const { onChangePage } = useAppFetch<fetchCoursesProps>(
     (args) => dispatch(fetchCourses(args)),

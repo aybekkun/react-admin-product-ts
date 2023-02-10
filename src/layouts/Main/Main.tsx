@@ -25,6 +25,8 @@ import { CHARTS, COURSES, INSTRUMENTS, LEADS, MAIN, ORDERS, SETTINGS, SUPPORT } 
 import { Outlet, useLocation } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
+import { useTranslation } from "react-i18next";
+import SelectLang from "./components/SelectLang";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -97,7 +99,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 export default function Main() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const { t } = useTranslation();
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -109,7 +111,7 @@ export default function Main() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: 10}} open={open}>
+      <AppBar position="fixed" sx={{ zIndex: 10 }} open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -123,13 +125,26 @@ export default function Main() {
           >
             <MenuIcon />
           </IconButton>
-
-          <Typography variant="h6" noWrap component="div">
-            Sales Up
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              flexGrow: 1,
+            }}
+          >
+            <Box>
+              <Typography variant="h6" noWrap component="div">
+                Sales Up
+              </Typography>
+            </Box>
+            <Box>
+              <SelectLang />
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
-      <Drawer  sx={{ zIndex: 5}} variant="permanent" open={open}>
+      <Drawer sx={{ zIndex: 5 }} variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -137,23 +152,23 @@ export default function Main() {
         </DrawerHeader>
         <Divider />
         <List>
-          <SidebarLink text="Home" to={MAIN} open={open} icon={<HomeOutlinedIcon />} />
+          <SidebarLink text={t("main")} to={MAIN} open={open} icon={<HomeOutlinedIcon />} />
         </List>
         <Divider />
         <List>
-          <SidebarLink text="Leads" to={LEADS} open={open} icon={<PermContactCalendarIcon />} />
-          <SidebarLink text="Orders" to={ORDERS} open={open} icon={<AddShoppingCartIcon />} />
-          <SidebarLink text="Courses" to={COURSES} open={open} icon={<BookOutlinedIcon />} />
+          <SidebarLink text={t("leads")} to={LEADS} open={open} icon={<PermContactCalendarIcon />} />
+          <SidebarLink text={t("orders")} to={ORDERS} open={open} icon={<AddShoppingCartIcon />} />
+          <SidebarLink text={t("courses")} to={COURSES} open={open} icon={<BookOutlinedIcon />} />
         </List>
         <Divider />
         <List>
-          <SidebarLink text="Instruments" to={INSTRUMENTS} open={open} icon={<HandymanOutlinedIcon />} />
-          <SidebarLink text="Settings" to={SETTINGS} open={open} icon={<TuneOutlinedIcon />} />
-          <SidebarLink text="Charts" to={CHARTS} open={open} icon={<InsertChartOutlinedTwoToneIcon />} />
+          <SidebarLink text={t("instruments")} to={INSTRUMENTS} open={open} icon={<HandymanOutlinedIcon />} />
+          <SidebarLink text={t("settings")} to={SETTINGS} open={open} icon={<TuneOutlinedIcon />} />
+          <SidebarLink text={t("charts")} to={CHARTS} open={open} icon={<InsertChartOutlinedTwoToneIcon />} />
         </List>
         <Divider />
         <List>
-          <SidebarLink text="Support" to={SUPPORT} open={open} icon={<QuestionMarkOutlinedIcon />} />
+          <SidebarLink text={t("support")} to={SUPPORT} open={open} icon={<QuestionMarkOutlinedIcon />} />
         </List>
       </Drawer>
       <Box bgcolor={"#F5F5F5"} component="main" sx={{ flexGrow: 1, p: 3, minHeight: "100vh" }}>

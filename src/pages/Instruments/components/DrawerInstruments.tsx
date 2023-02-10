@@ -5,6 +5,7 @@ import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { FormEvent, useReducer, useState } from "react";
+import { useTranslation } from "react-i18next";
 import MyMoneyInput from "../../../components/Form/MyMoneyInput";
 import MyTextArea from "../../../components/Form/MyTextArea";
 import MyAddButton from "../../../components/UI/MyAddButton";
@@ -26,6 +27,7 @@ type FormType = {
 };
 type ReducerType = { type: string; name: string; description: string };
 const DrawerInstruments = ({ onClose, open }: DrawerInstrumentsProps) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { formData, handleInputChange, handleSubmit, isSendingForm } = useSimpleForm<FormType>(
     { name: "", price: "", type: "Web" },
@@ -42,7 +44,7 @@ const DrawerInstruments = ({ onClose, open }: DrawerInstrumentsProps) => {
     <Drawer open={open} sx={{ zIndex: 100 }} anchor="right" onClose={onClose}>
       <Box p={2} width={300}>
         <Typography variant="h5" mb={2} color="primary">
-          Instruments
+          {t("instruments")}
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -53,10 +55,10 @@ const DrawerInstruments = ({ onClose, open }: DrawerInstrumentsProps) => {
             sx={{ mb: 2 }}
             fullWidth
             inputProps={{ maxLength: 200 }}
-            label="Instruments name"
+            label={t("instruments_name")}
             required
           />
-          <MyMoneyInput name="price" label={"Price"} value={price} onChange={handleInputChange} fullWidth required />
+          <MyMoneyInput name="price" label={t("price")} value={price} onChange={handleInputChange} fullWidth required />
           {/* @ts-ignore */}
           <Select name="type" value={type} onChange={handleInputChange} sx={{ my: 2 }} fullWidth size="small" required>
             <MenuItem value={"Web"}>Web</MenuItem>

@@ -1,3 +1,4 @@
+import { IInstruments, IInstrumentsData } from './../instruments/types';
 import { ICourseData } from './../courses/types';
 export interface ILeadsState extends ILeads {
     currentPage: number,
@@ -21,7 +22,7 @@ export interface ILeadsData {
   courseId: number | null;
   createdAt: Date;
   course: ICourseData | null;
-  instrument: null;
+  instrument: IInstrumentsData | null;
   real_status:{
     id:number,
     name:string

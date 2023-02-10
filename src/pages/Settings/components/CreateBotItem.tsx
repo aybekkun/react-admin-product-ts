@@ -25,10 +25,12 @@ const CreateBot = () => {
   const { bot_token } = formData;
   return (
     <>
-      <Typography variant="h6" color={"primary"}>
+      <Typography variant="h6" component={"p"} color={"primary"}>
         Create bot
       </Typography>
-      <Typography color={"info"}>Insert token</Typography>
+      <Typography component={"p"} color={"info"}>
+        Insert token
+      </Typography>
 
       <form onSubmit={handleSubmit}>
         <TextField name="bot_token" value={bot_token} onChange={handleInputChange} size="small" fullWidth required />

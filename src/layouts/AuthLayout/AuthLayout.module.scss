@@ -1,0 +1,24 @@
+.root {
+  background-color: #e0e0e0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  height: 95vh;
+  min-width: 320px;
+  max-width: 400px;
+  padding: 35px;
+  background-color: #fff;
+  border-radius: 5px;
+  h2 {
+    padding-top: 20px;
+    margin: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #1976d2;
+  }
+}

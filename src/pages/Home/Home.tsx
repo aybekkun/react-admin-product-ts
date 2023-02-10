@@ -1,4 +1,4 @@
-import React, { FC, ReactNode ,useState} from "react";
+import React, { FC, ReactNode, useState } from "react";
 import { IColumns } from "../../@types/columns.type";
 import CustomTable from "../../components/CustomTable/CustomTable";
 import MyMoneyInput from "../../components/Form/MyMoneyInput";
@@ -42,13 +42,7 @@ const columns: IColumns<DataType>[] = [
 ];
 
 const HomePage = () => {
-  const [s,setS] = useState("");
-  return (
-    <>
-      <MyMoneyInput value={s} onChange={e=>setS(e.target.value)} />
-      <CustomTable columns={columns} source={dataSource} />
-    </>
-  );
+  return <>Home </>;
 };
 
 export default HomePage;

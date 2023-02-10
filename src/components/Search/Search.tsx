@@ -18,10 +18,13 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import ClearIcon from "@mui/icons-material/Clear";
 import EmailIcon from "@mui/icons-material/Email";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import SendTgMesssage from "../CustomTable/components/SendTgMesssage";
 type SearchProps = {
   onSearch: (args: any) => void;
 };
 const Search = ({ onSearch }: SearchProps) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { searchParams } = useAppSelector((state) => state.searchParams);
 
@@ -43,23 +46,23 @@ const Search = ({ onSearch }: SearchProps) => {
       <TextField
         value={searchParams.name}
         onChange={(e) => dispatch(setSearchParamsName(e.target.value))}
-        label="FIO"
+        label={t("fio")}
         placeholder="User"
         size="small"
       />
       <MyPhoneInput
         value={searchParams.phone}
         onChange={(e) => dispatch(setSearchParamsPhone(e.target.value))}
-        label="Phone"
+        label={t("phone")}
       />
       <MyDateInput
         value={searchParams.from as Dayjs}
-        label="From"
+        label={t("from")}
         onChangeValue={(val) => dispatch(setSearchParamsFrom(val))}
       />
       <MyDateInput
         value={searchParams.to as Dayjs}
-        label="To"
+        label={t("to")}
         onChangeValue={(val) => dispatch(setSearchParamsTo(val))}
       />
       <ButtonGroup>
@@ -69,9 +72,7 @@ const Search = ({ onSearch }: SearchProps) => {
         <IconButton onClick={onClickClear} color="error">
           <ClearIcon />
         </IconButton>
-        <IconButton color="info">
-          <EmailIcon />
-        </IconButton>
+        <SendTgMesssage />
       </ButtonGroup>
     </Stack>
   );
