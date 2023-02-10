@@ -18,7 +18,7 @@ const AuthLayout = () => {
   );
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(userAuth({ username: form.username, password: form.password }));
+    dispatch(userAuth({ username: form.username.trim(), password: form.password.trim() }));
   };
 
   if (isAuth) {

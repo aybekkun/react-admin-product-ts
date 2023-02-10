@@ -6,6 +6,7 @@ import ChartsPage from "../pages/Charts/ChartsPage";
 import CoursesPage from "../pages/Courses/CoursesPage";
 import HomePage from "../pages/Home/Home";
 import InstrumentsPage from "../pages/Instruments/InstrumentsPage";
+import DragAndDrop from "../pages/Leads/components/DragAndDrop";
 import LeadsPage from "../pages/Leads/LeadsPage";
 import OrdersPage from "../pages/Orders/OrdersPage";
 import PublicFormPage from "../pages/PublicForm/PublicFormPage";
@@ -50,7 +51,7 @@ const routes: IRoutes[] = [
   },
   {
     path: SUPPORT,
-    element: <SupportPage />,
+    element: <DragAndDrop />,
   },
 ];
 
