@@ -45,7 +45,8 @@ const SendTgMesssage = ({ userId }: SendTgMesssageProps) => {
     if (file) {
       fd.append("file", file);
     }
-    await dispatch(createSendMessage(fd));
+   
+    // await dispatch(createSendMessage(fd));
     handleClose();
   };
   return (

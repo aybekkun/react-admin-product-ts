@@ -1,17 +1,6 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  Typography,
-  Paper,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
-
+import "./DnD.scss";
 type ItemType = {
   id: number;
   title: string;
@@ -24,59 +13,70 @@ type BoardType = {
 };
 
 const DragAndDrop = () => {
-  const [boards, setBoars] = useState<BoardType[]>([
+  const [boards, setBoards] = useState<any>([
     {
       id: 1,
-      title: "sdelat",
+      title: "Сделать",
       items: [
-        {
-          id: 1,
-          title: "1",
-        },
-        {
-          id: 2,
-          title: "2",
-        },
+        { id: 1, title: "Пойти в магазин" },
+        { id: 2, title: "Выкенуть мусор" },
+        { id: 3, title: "Покушать" },
       ],
     },
     {
       id: 2,
-      title: "LSDfsad",
+      title: "Проверить",
       items: [
+        { id: 4, title: "Код ревью" },
+        { id: 5, title: "Задачи на факториал" },
         {
-          id: 4,
-          title: "4",
-        },
-        {
-          id: 5,
-          title: "5",
+          id: 6,
+          title: "Задачи на Фибоначи",
         },
       ],
     },
+    {
+      id: 3,
+      title: "Сделано",
+      items: [
+        { id: 7, title: "Снять видео" },
+        { id: 8, title: "Смонтировать" },
+        { id: 9, title: "Отрендерить" },
+      ],
+    },
   ]);
+
   const [currentBoard, setCurrentBoard] = useState<any>(null);
   const [currentItem, setCurrentItem] = useState<any>(null);
 
-  function dragOverHandler(e: React.DragEvent<HTMLDivElement>): void {
+  function dragOverHandler(e) {
     e.preventDefault();
+    if (e.target.className === "item") {
+      e.target.style.boxShadow = "0 4px 3px white";
+    }
   }
 
-  function dragLeavehandler(e: React.DragEvent<HTMLDivElement>): void {}
+  function dragLeaveHandler(e) {
+    e.target.style.boxShadow = "none";
+  }
 
-  function dragEndHandler(e: React.DragEvent<HTMLDivElement>): void {}
-
-  function dragStartHandler(e: React.DragEvent<HTMLDivElement>, board: BoardType, item: ItemType): void {
+  function dragStartHandler(e, board, item) {
     setCurrentBoard(board);
     setCurrentItem(item);
   }
 
-  function dropHandler(e: React.DragEvent<HTMLDivElement>, board: BoardType, item: ItemType): void {
+  function dragEndHandler(e) {
+    e.target.style.boxShadow = "none";
+  }
+
+  function dropHandler(e, board, item) {
     e.preventDefault();
+    e.stopPropagation();
     const currentIndex = currentBoard.items.indexOf(currentItem);
     currentBoard.items.splice(currentIndex, 1);
     const dropIndex = board.items.indexOf(item);
     board.items.splice(dropIndex + 1, 0, currentItem);
-    setCurrentBoard(
+    setBoards(
       boards.map((b) => {
         if (b.id === board.id) {
           return board;
@@ -87,12 +87,15 @@ const DragAndDrop = () => {
         return b;
       })
     );
+    e.target.style.boxShadow = "none";
   }
-  function dropCardHandler(e: React.DragEvent<HTMLDivElement>, board: BoardType): void {
+
+  function dropCardHandler(e, board) {
+    // e.stopPropagation()
     board.items.push(currentItem);
     const currentIndex = currentBoard.items.indexOf(currentItem);
     currentBoard.items.splice(currentIndex, 1);
-    setCurrentBoard(
+    setBoards(
       boards.map((b) => {
         if (b.id === board.id) {
           return board;
@@ -103,36 +106,34 @@ const DragAndDrop = () => {
         return b;
       })
     );
+    e.target.style.boxShadow = "none";
   }
-
   return (
     <div>
       <Box sx={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
         {boards.map((board) => (
-          <Box
-            component={"div"}
-            bgcolor="#fff"
-            sx={{ width: "10rem", height:"20rem" }}
-            onDrop={(e) => dropCardHandler(e, board)}
-            onDragOver={(e) => dragOverHandler(e)}
+          <div
+            className="board"
             key={board.id}
-            title={board.title}
+            onDragOver={(e) => dragOverHandler(e)}
+            onDrop={(e) => dropCardHandler(e, board)}
           >
+            <div className="board__title">{board.title}</div>
             {board.items.map((item) => (
               <div
-                key={item.id}
                 className="item"
+                key={item.id}
+                draggable={true}
                 onDragOver={(e) => dragOverHandler(e)}
-                onDragLeave={(e) => dragLeavehandler(e)}
+                onDragLeave={(e) => dragLeaveHandler(e)}
                 onDragStart={(e) => dragStartHandler(e, board, item)}
                 onDragEnd={(e) => dragEndHandler(e)}
                 onDrop={(e) => dropHandler(e, board, item)}
-                draggable
               >
-                <ListItemButton sx={{ cursor: "grab", bgcolor: "#fff" }}>{item.title}</ListItemButton>
+                {item.title}
               </div>
             ))}
-          </Box>
+          </div>
         ))}
       </Box>
     </div>
@@ -143,7 +144,5 @@ type MyCardProps = {
   title?: string;
   children?: React.ReactNode | React.ReactNode[];
 };
-
-
 
 export default DragAndDrop;
